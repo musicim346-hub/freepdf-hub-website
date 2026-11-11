@@ -1,0 +1,1 @@
+# Add the exact seller record supplied by your approved advertising provider. Do not invent a publisher ID.

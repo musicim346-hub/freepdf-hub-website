@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://freepdf.sbs/sitemap.xml

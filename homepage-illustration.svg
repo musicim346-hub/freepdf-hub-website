@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="620" viewBox="0 0 1600 620">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff4f1"/><stop offset=".52" stop-color="#f2f7ff"/><stop offset="1" stop-color="#fff"/></linearGradient>
+ <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#f4f6fb"/></linearGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="12"/></filter>
+</defs>
+<rect width="1600" height="620" fill="url(#sky)"/>
+<circle cx="1330" cy="100" r="190" fill="#ffd9ce" opacity=".32"/>
+<circle cx="180" cy="480" r="230" fill="#dceaff" opacity=".5"/>
+<g opacity=".18" fill="#e5322d"><circle cx="140" cy="100" r="5"/><circle cx="260" cy="210" r="4"/><circle cx="1450" cy="410" r="5"/><circle cx="1220" cy="520" r="4"/></g>
+<g transform="translate(1200 145) rotate(12)">
+ <rect x="18" y="22" width="190" height="245" rx="18" fill="#a8b6ce" opacity=".25" filter="url(#shadow)"/>
+ <rect width="190" height="245" rx="18" fill="url(#paper)" stroke="#e5e9f1" stroke-width="3"/>
+ <rect x="25" y="28" width="58" height="70" rx="12" fill="#e5322d"/>
+ <path d="M40 48h28M40 60h28M40 72h20" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+ <path d="M28 128h130M28 150h130M28 172h100M28 194h120" stroke="#d7deea" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g transform="translate(180 245) rotate(-13)">
+ <rect x="18" y="22" width="155" height="205" rx="16" fill="#a8b6ce" opacity=".2" filter="url(#shadow)"/>
+ <rect width="155" height="205" rx="16" fill="#fff" stroke="#e7ebf2" stroke-width="3"/>
+ <rect x="22" y="25" width="52" height="60" rx="10" fill="#3978d7"/>
+ <path d="M36 43h24M36 55h24M36 67h16" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+ <path d="M22 112h110M22 134h110M22 156h80" stroke="#dce2ec" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g transform="translate(930 390) rotate(-8)" opacity=".65">
+ <rect width="110" height="145" rx="14" fill="#fff" stroke="#e7ebf2" stroke-width="3"/>
+ <rect x="17" y="18" width="40" height="48" rx="8" fill="#26a879"/>
+ <path d="M17 88h76M17 105h76M17 122h55" stroke="#dce2ec" stroke-width="6" stroke-linecap="round"/>
+</g>
+</svg>
