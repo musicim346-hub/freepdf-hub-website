@@ -1,85 +1,157 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="FreePDF Hub offers simple free online PDF tools to merge, split, rotate, convert and manage PDF files.">
-<meta name="theme-color" content="#e5322d">
-<title>FreePDF Hub – Free Online PDF Tools</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#5145e5">
+<title>FreePDF Hub — Free Online PDF Tools</title>
+<meta name="description" content="FreePDF Hub — simple browser-based PDF tools. Your files are processed on your device.">
+<style>
+:root{--ink:#192044;--muted:#69738e;--purple:#5145e5;--cyan:#16b8cf;--pink:#ef5798;--line:#e8eafa}
+*{box-sizing:border-box}body{margin:0;background:#f7f8ff;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}a{text-decoration:none;color:inherit}
+.wrap{width:min(1120px,92%);margin:auto}header{background:#ffffffed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:4}nav{height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:21px;font-weight:900;letter-spacing:-.7px;display:flex;align-items:center;gap:10px}.logo{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#5548eb,#18b8d4);font-size:21px}.navlinks{display:flex;gap:24px;color:#68718a;font-size:14px;font-weight:650}.navbtn,.primary{background:linear-gradient(100deg,#5145e5,#7464f1);color:white;border:0;border-radius:12px;padding:12px 17px;font-weight:800;cursor:pointer}
+.hero{padding:66px 0 54px;background:radial-gradient(ellipse at 8% 5%,#e6e2ff,transparent 36%),radial-gradient(ellipse at 92% 20%,#d8f7fa,transparent 34%),linear-gradient(135deg,#fcfbff,#f1f7ff)}.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px}.tag{display:inline-block;background:#fff;border:1px solid #e7e6ff;border-radius:30px;padding:8px 13px;color:#5145d8;font-size:12px;font-weight:850;letter-spacing:.4px}h1{font-size:clamp(42px,5vw,62px);line-height:1.04;letter-spacing:-2.5px;margin:19px 0}.grad{background:linear-gradient(90deg,#5145e5,#ec579c 58%,#f39a39);background-clip:text;color:transparent}.hero p{color:var(--muted);font-size:16px;line-height:1.75;max-width:560px}.hero-art{height:300px;border-radius:45% 55% 52% 48%;background:linear-gradient(135deg,#dcd7ff,#c9f4f5 60%,#ffe0ed);display:grid;place-items:center;position:relative}.paper{width:190px;height:240px;background:white;border-radius:17px;box-shadow:0 25px 55px #343c7030;padding:25px;transform:rotate(5deg)}.paper b{display:inline-block;background:#ff6c71;color:#fff;padding:7px 9px;border-radius:7px;font-size:11px}.paper i{display:block;height:8px;background:#edf0f8;border-radius:8px;margin-top:15px}.paper i:nth-of-type(2){width:75%}.paper i:nth-of-type(3){width:88%}.paper i:nth-of-type(4){width:58%}.bars{height:55px;background:#eeeaff;border-radius:10px;margin-top:22px;display:flex;align-items:end;justify-content:center;gap:8px;padding:9px}.bars span{width:17px;background:linear-gradient(#7567ef,#19b8cf);border-radius:4px 4px 0 0}.bars span:nth-child(1){height:35%}.bars span:nth-child(2){height:70%}.bars span:nth-child(3){height:50%}.bars span:nth-child(4){height:90%}
+.section{padding:58px 0}.head{text-align:center;max-width:650px;margin:0 auto 28px}.head small{color:#6155df;font-weight:900;letter-spacing:1.5px}.head h2{font-size:34px;letter-spacing:-1px;margin:9px 0}.head p{color:var(--muted);line-height:1.6}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.tool{background:white;border:1px solid var(--line);border-radius:17px;padding:19px;text-align:left;cursor:pointer;min-height:160px;transition:.2s;color:var(--ink)}.tool:hover{transform:translateY(-4px);box-shadow:0 13px 30px #27305d13;border-color:#d5d2ff}.ico{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:21px;margin-bottom:13px}.v{background:#efecff}.b{background:#e5f7ff}.p{background:#ffebf3}.o{background:#fff1df}.g{background:#e5f8ef}.tool strong{display:block;font-size:15px;margin-bottom:6px}.tool span{font-size:12px;color:#78819a;line-height:1.5;display:block}.tool em{display:inline-block;margin-top:10px;color:#5b50df;font-size:11px;font-style:normal;font-weight:850}
+.notice{margin:20px auto 0;padding:13px 16px;background:#eef9ff;border:1px solid #d7f0fa;color:#42677a;border-radius:12px;font-size:12px;line-height:1.6;max-width:800px}
+footer{background:#191f40;color:white;padding:30px 0;margin-top:25px}.foot{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap}.foot small{color:#b6bdd5}
+.modal{display:none;position:fixed;inset:0;background:#111936a8;z-index:9;padding:18px;overflow:auto;align-items:center;justify-content:center}.modal.open{display:flex}.panel{width:min(570px,100%);background:white;border-radius:20px;padding:24px;box-shadow:0 24px 80px #11193655}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:15px}.panel h2{font-size:22px;margin:0}.close{border:0;background:#f0f1fa;border-radius:10px;width:36px;height:36px;font-size:20px;cursor:pointer}.panel p{color:var(--muted);font-size:13px;line-height:1.6}.drop{border:2px dashed #c9c9f0;background:#fafaff;border-radius:15px;padding:23px;text-align:center;margin:18px 0}.drop input{max-width:100%;margin-top:10px}.field{display:block;margin:12px 0;color:#4e5874;font-size:13px;font-weight:700}.field input,.field textarea{display:block;width:100%;margin-top:7px;border:1px solid #dfe2f1;border-radius:10px;padding:11px;font:inherit}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.secondary{border:1px solid #dfe2f1;background:#fff;border-radius:11px;padding:11px 15px;font-weight:750;cursor:pointer}.status{margin-top:14px;font-size:13px;line-height:1.5;color:#53607b;min-height:20px}.status.error{color:#c13c57}.status.ok{color:#16845a}.tiny{font-size:11px!important;color:#8991a8!important}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr;text-align:center}.hero p{margin-left:auto;margin-right:auto}.hero-art{max-width:420px;width:90%;margin:15px auto 0}.grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}}
+@media(max-width:520px){.hero{padding:48px 0}.grid{gap:9px}.tool{padding:14px;min-height:155px}.head h2{font-size:28px}.brand{font-size:18px}.navbtn{font-size:12px;padding:10px}}
+</style>
 </head>
-<body class="smallpdf-inspired">
-<div class="top"><div class="container"><span>✦ Free online PDF tools</span><span>No sign-up · Easy to use · Mobile friendly</span></div></div>
-<header>
- <div class="container nav">
-  <a class="logo" href="/"><span class="logo-mark">F</span>FreePDF <span>Hub</span></a>
-  <button class="menu" id="menuBtn" aria-label="Open navigation">☰</button>
-  <nav class="links" id="navLinks"><a href="/">Home</a><a href="/tools.html">All PDF tools</a><a href="/about.html">About</a><a href="/faq.html">FAQ</a><a href="/contact.html">Contact</a></nav>
-  <div class="navright"><a class="btn small" href="/tools.html">All tools</a></div>
- </div>
-</header>
-<main>
-<section class="sp-hero">
- <div class="container sp-hero-inner">
-  <div class="sp-copy">
-   <span class="pill">YOUR FREE PDF TOOLKIT</span>
-   <h1>We make PDF <span>easy.</span></h1>
-   <p>All the tools you need to work with PDF files. Convert, organize and manage your documents in just a few clicks.</p>
-   <div class="sp-search"><span>⌕</span><input id="toolSearch" type="search" placeholder="Search for a PDF tool..." aria-label="Search PDF tools"><a href="/tools.html" aria-label="Browse all tools">Search</a></div>
-   <div class="sp-benefits"><span>✓ Free to use</span><span>✓ No registration</span><span>✓ Works on mobile</span></div>
+<body>
+<header><div class="wrap"><nav><a class="brand" href="#"><span class="logo">▤</span>FreePDF <span style="color:#5b50e7;margin-left:-10px">Hub</span></a><div class="navlinks"><a href="#tools">PDF Tools</a><a href="#about">About</a><a href="#support">Like & Donate</a></div><a class="navbtn" href="#tools">Start now ↗</a></nav></div></header>
+<section class="hero"><div class="wrap hero-grid"><div><span class="tag">✦ SIMPLE · FAST · FREE</span><h1>Your PDFs.<br><span class="grad">Made Simple.</span></h1><p>Useful PDF tools in one friendly place. Combine files, split pages, rotate documents, extract text and create PDFs from images — right in your browser.</p><a class="primary" href="#tools">Explore PDF Tools →</a><p class="tiny">Your selected files are processed locally in your browser for the tools on this page.</p></div><div class="hero-art"><div class="paper"><b>PDF</b><i></i><i></i><i></i><i></i><div class="bars"><span></span><span></span><span></span><span></span></div></div></div></div></section>
+<section class="section" id="tools"><div class="wrap"><div class="head"><small>YOUR PDF WORKSPACE</small><h2>Choose a tool to get started</h2><p>Select a tool, add your files and download the result.</p></div><div class="grid">
+<button class="tool" data-tool="merge"><div class="ico v">▤</div><strong>Merge PDF</strong><span>Combine multiple PDF files into one.</span><em>OPEN TOOL →</em></button>
+<button class="tool" data-tool="split"><div class="ico b">✂</div><strong>Split PDF</strong><span>Extract selected pages into a new PDF.</span><em>OPEN TOOL →</em></button>
+<button class="tool" data-tool="compress"><div class="ico g">⇩</div><strong>Compress PDF</strong><span>Re-save and optimize PDF structure where possible.</span><em>OPEN TOOL →</em></button>
+<button class="tool" data-tool="rotate"><div class="ico o">↻</div><strong>Rotate PDF</strong><span>Rotate all pages to the correct orientation.</span><em>OPEN TOOL →</em></button>
+<button class="tool" data-tool="images"><div class="ico p">▧</div><strong>Images to PDF</strong><span>Turn JPG and PNG images into a PDF.</span><em>OPEN TOOL →</em></button>
+<button class="tool" data-tool="extract"><div class="ico v">≡</div><strong>PDF to Text</strong><span>Extract selectable text from a PDF.</span><em>OPEN TOOL →</em></button>
+<button class="tool" data-tool="word"><div class="ico b">W</div><strong>Word to PDF</strong><span>Convert a .docx file to a simple PDF.</span><em>OPEN TOOL →</em></button>
+<button class="tool" data-tool="pages"><div class="ico p">#</div><strong>Add Page Numbers</strong><span>Stamp page numbers onto a PDF.</span><em>OPEN TOOL →</em></button>
+</div><div class="notice"><b>Privacy:</b> These tools run in your browser; files are not uploaded to a FreePDF Hub server. Compression depends on the PDF contents and may not greatly reduce every file. Word conversion supports basic .docx text and may not preserve complex layouts.</div></div></section>
+<section class="section" id="about" style="background:white"><div class="wrap head"><small>MADE FOR EVERYONE</small><h2>Simple tools, right in your browser</h2><p>No account needed for these tools. Works on phones, tablets and computers. Keep a copy of your original files before editing.</p></div></section>
+
+<section class="section" id="support" style="background:linear-gradient(135deg,#f0edff,#e5faff)">
+ <div class="wrap">
+  <div class="head"><small>SUPPORT FREEPDF HUB</small><h2>Like it? Help us keep it growing.</h2><p>If FreePDF Hub is useful, leave a like, share it with friends, or support the project with a voluntary donation.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:760px;margin:auto">
+   <div style="background:#fff;border:1px solid #e8eafa;border-radius:18px;padding:24px;text-align:center">
+    <div style="font-size:34px">💜</div><h3 style="margin:10px 0 7px">Like FreePDF Hub</h3>
+    <p style="color:#69738e;font-size:13px;line-height:1.6">Enjoying the free tools? Tap like to show your support.</p>
+    <button id="likeBtn" class="primary" type="button" style="margin-top:8px">♡ Like <span id="likeCount">0</span></button>
+    <p id="likeMessage" class="tiny" aria-live="polite">Your like is saved on this device.</p>
+   </div>
+   <div style="background:#fff;border:1px solid #e8eafa;border-radius:18px;padding:24px;text-align:center">
+    <div style="font-size:34px">☕</div><h3 style="margin:10px 0 7px">Donate to support</h3>
+    <p style="color:#69738e;font-size:13px;line-height:1.6">Donations are optional and help support website improvements.</p>
+    <div style="background:#f6f7ff;border:1px solid #e8eafa;border-radius:10px;padding:11px;margin:12px 0">
+     <small style="color:#69738e">UPI ID / payment detail provided</small><br><strong id="upiText">76740 97096</strong>
+    </div>
+    <button id="copyUpi" class="secondary" type="button">Copy UPI detail</button>
+    <a id="donateBtn" class="primary" href="upi://pay?pa=7674097096&amp;pn=FreePDF%20Hub&amp;cu=INR" style="display:inline-block;margin:8px 0 0">Open UPI app ↗</a>
+    <p class="tiny">Please verify the recipient name and UPI ID in your payment app before paying.</p>
+   </div>
   </div>
-  <div class="sp-visual" aria-hidden="true"><div class="visual-chip chip-one">PDF</div><div class="visual-chip chip-two">DOCX</div><div class="visual-chip chip-three">JPG</div></div>
+  <div style="text-align:center;margin-top:22px"><button id="shareHubBtn" class="secondary" type="button">↗ Share FreePDF Hub</button></div>
  </div>
 </section>
 
-<section class="sp-tools section">
- <div class="container">
-  <div class="sp-heading"><div><span class="eyebrow">GET STARTED</span><h2>Most popular PDF tools</h2><p>Choose a tool and get your document task done.</p></div><a href="/tools.html" class="sp-viewall">View all tools →</a></div>
-  <div class="sp-grid" id="popularTools">
-   <a class="sp-card" href="/tools/merge-pdf.html"><span class="sp-icon red">▤</span><div><h3>Merge PDF</h3><p>Combine multiple PDFs into one file.</p></div><b>→</b></a>
-   <a class="sp-card" href="/tools/split-pdf.html"><span class="sp-icon orange">✂</span><div><h3>Split PDF</h3><p>Separate pages from a PDF.</p></div><b>→</b></a>
-   <a class="sp-card" href="/tools/optimize-pdf.html"><span class="sp-icon green">⇣</span><div><h3>Optimize PDF</h3><p>Re-save a PDF to optimize its structure.</p></div><b>→</b></a>
-   <a class="sp-card" href="/tools/word-to-pdf.html"><span class="sp-icon blue">W</span><div><h3>Word to PDF</h3><p>Convert a Word document to PDF.</p></div><b>→</b></a>
-   <a class="sp-card" href="/tools/images-to-pdf.html"><span class="sp-icon purple">▧</span><div><h3>JPG to PDF</h3><p>Turn images into a PDF document.</p></div><b>→</b></a>
-   <a class="sp-card" href="/tools/rotate-pdf.html"><span class="sp-icon teal">↻</span><div><h3>Rotate PDF</h3><p>Rotate your PDF pages.</p></div><b>→</b></a>
-   <a class="sp-card" href="/tools/extract-pages.html"><span class="sp-icon pink">▣</span><div><h3>Extract PDF pages</h3><p>Save selected pages as a new PDF.</p></div><b>→</b></a>
-   <a class="sp-card" href="/tools/pdf-info.html"><span class="sp-icon navy">ⓘ</span><div><h3>PDF information</h3><p>Check basic details about your PDF.</p></div><b>→</b></a>
-  </div>
- </div>
-</section>
+<footer><div class="wrap foot"><div class="brand"><span class="logo">▤</span>FreePDF Hub</div><small>© <span id="year"></span> FreePDF Hub · Simple PDF tools in one place</small><small><a href="https://freepdf.sbs/">freepdf.sbs</a></small></div></footer>
 
-<section class="sp-feature">
- <div class="container sp-feature-inner">
-  <div><span class="eyebrow">SIMPLE WORKFLOW</span><h2>Keep your document tasks simple</h2><p>Choose a tool, add your file, and download the result. FreePDF Hub is designed to be straightforward on phones, tablets and computers.</p><a class="btn" href="/tools.html">Explore PDF tools</a></div>
-  <div class="feature-art"><div class="feature-sheet"><div class="sheet-label">PDF</div><i></i><i></i><i></i><i></i></div><div class="feature-arrow">↗</div><div class="feature-check">✓</div></div>
- </div>
-</section>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="toolTitle"><div class="panel"><div class="panel-head"><h2 id="toolTitle">PDF Tool</h2><button class="close" id="close" aria-label="Close">×</button></div><p id="toolDesc">Select your file to begin.</p><div class="drop"><b id="filePrompt">Choose your files</b><br><input id="files" type="file" multiple accept=".pdf,application/pdf"></div><div id="options"></div><div class="actions"><button class="primary" id="run">Process files</button><button class="secondary" id="cancel">Cancel</button></div><div class="status" id="status" aria-live="polite"></div></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.min.js"></script>
+<script>
+(()=> {
+ const $=id=>document.getElementById(id), modal=$('modal'), files=$('files'), status=$('status'), options=$('options');
+ $('year').textContent=new Date().getFullYear();
+ if(window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+ let current='';
+ const configs={
+ merge:['Merge PDF','Choose two or more PDF files. They will be joined in the order selected.','Choose 2 or more PDF files','pdf'],
+ split:['Split PDF','Enter the page numbers or ranges to extract. Example: 1, 3-5, 8','Choose one PDF file','pdf'],
+ compress:['Compress PDF','Re-saves the PDF and removes some redundant structure. This is not image recompression, so size reduction varies.','Choose one PDF file','pdf'],
+ rotate:['Rotate PDF','Rotate every page clockwise by the selected angle.','Choose one PDF file','pdf'],
+ images:['Images to PDF','Choose JPG or PNG images. They will be placed on separate PDF pages.','Choose image files','image'],
+ extract:['PDF to Text','Extract selectable text from the PDF. Scanned pages need OCR, which is not included.','Choose one PDF file','pdf'],
+ word:['Word to PDF','Convert a .docx document’s text to a clean, basic PDF. Complex formatting, tables and images may not be preserved.','Choose one DOCX file','docx'],
+ pages:['Add Page Numbers','Stamp a page number at the bottom of each page.','Choose one PDF file','pdf']
+ };
+ document.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>openTool(b.dataset.tool)));
+ function openTool(name){current=name;let c=configs[name];$('toolTitle').textContent=c[0];$('toolDesc').textContent=c[1];$('filePrompt').textContent=c[2];files.accept=c[3]==='image'?'.jpg,.jpeg,.png,image/jpeg,image/png':c[3]==='docx'?'.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document':'.pdf,application/pdf';files.multiple=name==='merge'||name==='images';files.value='';options.innerHTML='';status.textContent='';status.className='status';
+ if(name==='split') options.innerHTML='<label class="field">Pages to extract<input id="ranges" value="1" placeholder="e.g. 1, 3-5, 8"></label>';
+ if(name==='rotate') options.innerHTML='<label class="field">Rotation<select id="angle"><option value="90">90° clockwise</option><option value="180">180°</option><option value="270">270° clockwise</option></select></label>';
+ if(name==='pages') options.innerHTML='<label class="field">Starting number<input id="startNum" type="number" min="1" value="1"></label>';
+ modal.classList.add('open');
+ }
+ function say(msg,kind=''){status.textContent=msg;status.className='status '+kind}
+ $('close').onclick=$('cancel').onclick=()=>modal.classList.remove('open');
+ modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
+ function download(bytes,name,type='application/pdf'){const blob=bytes instanceof Blob?bytes:new Blob([bytes],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+ async function readPdf(file){return PDFLib.PDFDocument.load(await file.arrayBuffer())}
+ function parseRanges(s,max){let set=[];for(let part of s.split(',')){part=part.trim();if(!part)continue;let m=part.match(/^(\d+)\s*-\s*(\d+)$/);if(m){let a=+m[1],b=+m[2];if(a<1||b<a||b>max)throw Error('Invalid page range: '+part);for(let i=a;i<=b;i++)set.push(i-1)}else if(/^\d+$/.test(part)){let n=+part;if(n<1||n>max)throw Error('Page number out of range: '+part);set.push(n-1)}else throw Error('Please enter pages like 1, 3-5, 8')}return [...new Set(set)]}
+ $('run').onclick=async()=>{try{
+ const selected=[...files.files];if(!selected.length)throw Error('Please choose a file first.');
+ $('run').disabled=true;say('Working on your files…');
+ if(current==='images'){
+ const pdf=await PDFLib.PDFDocument.create();for(const f of selected){let bytes=await f.arrayBuffer(),img;if(/png/i.test(f.type)||/\.png$/i.test(f.name))img=await pdf.embedPng(bytes);else img=await pdf.embedJpg(bytes);let page=pdf.addPage([img.width,img.height]);page.drawImage(img,{x:0,y:0,width:img.width,height:img.height})}download(await pdf.save(),'images-to-pdf.pdf');say('Done! Your PDF has been downloaded.','ok');
+ } else if(current==='word'){
+ if(!window.docx)throw Error('DOCX library did not load. Check your internet connection and try again.');
+ const buf=await selected[0].arrayBuffer();const zip=await (await importDocxZip()).loadAsync(buf);let xml=await zip.file('word/document.xml').async('string');let doc=new DOMParser().parseFromString(xml,'application/xml');let paras=[...doc.getElementsByTagName('w:p')].map(p=>[...p.getElementsByTagName('w:t')].map(t=>t.textContent).join('')).filter(Boolean);
+ if(!paras.length)throw Error('No readable text was found in this DOCX file.');
+ const {PDFDocument,StandardFonts,rgb}=PDFLib;let pdf=await PDFDocument.create(),font=await pdf.embedFont(StandardFonts.Helvetica),size=11,margin=52,page=pdf.addPage([595,842]),y=790;
+ for(const para of paras){let words=para.split(/\s+/),line='';for(const w of words){let test=line?line+' '+w:w;if(font.widthOfTextAtSize(test,size)>490){if(y<margin){page=pdf.addPage([595,842]);y=790}page.drawText(line,{x:margin,y,size,font,color:rgb(.12,.15,.25)});y-=17;line=w}else line=test}if(line){if(y<margin){page=pdf.addPage([595,842]);y=790}page.drawText(line,{x:margin,y,size,font,color:rgb(.12,.15,.25)});y-=24}}
+ download(await pdf.save(),'word-to-pdf.pdf');say('Done! Basic text conversion downloaded.','ok');
+ } else if(current==='extract'){
+ const task=pdfjsLib.getDocument({data:await selected[0].arrayBuffer()});const pdf=await task.promise;let output=[];for(let n=1;n<=pdf.numPages;n++){let p=await pdf.getPage(n),content=await p.getTextContent();output.push('--- Page '+n+' ---\n'+content.items.map(x=>x.str).join(' '))}let txt=output.join('\n\n');if(!txt.replace(/[-\s]/g,''))throw Error('No selectable text found. This may be a scanned PDF and needs OCR.');download(new Blob([txt],{type:'text/plain;charset=utf-8'}),'extracted-text.txt','text/plain');say('Text extracted and downloaded.','ok');
+ } else {
+ const pdfs=await Promise.all(selected.map(readPdf));
+ if(current==='merge'){if(pdfs.length<2)throw Error('Choose at least two PDF files.');let out=await PDFLib.PDFDocument.create();for(const pdf of pdfs){let copied=await out.copyPages(pdf,pdf.getPageIndices());copied.forEach(p=>out.addPage(p))}download(await out.save(),'merged.pdf');}
+ if(current==='split'){let src=pdfs[0],idx=parseRanges($('ranges').value,src.getPageCount());if(!idx.length)throw Error('Enter at least one page.');let out=await PDFLib.PDFDocument.create(),copied=await out.copyPages(src,idx);copied.forEach(p=>out.addPage(p));download(await out.save(),'split-pages.pdf');}
+ if(current==='compress'){let out=await PDFLib.PDFDocument.create(),copied=await out.copyPages(pdfs[0],pdfs[0].getPageIndices());copied.forEach(p=>out.addPage(p));download(await out.save({useObjectStreams:true,objectsPerTick:50}),'compressed.pdf');}
+ if(current==='rotate'){let src=pdfs[0],angle=+$('angle').value;src.getPages().forEach(p=>p.setRotation(PDFLib.degrees((p.getRotation().angle+angle)%360)));download(await src.save(),'rotated.pdf');}
+ if(current==='pages'){let src=pdfs[0],font=await src.embedFont(PDFLib.StandardFonts.Helvetica),start=+$('startNum').value||1;src.getPages().forEach((p,i)=>{let {width}=p.getSize();p.drawText(String(start+i),{x:width/2-5,y:18,size:10,font,color:PDFLib.rgb(.35,.38,.48)})});download(await src.save(),'numbered.pdf');}
+ say('Done! Your processed file has been downloaded.','ok');
+ }
+ }catch(e){say(e.message||'Something went wrong. Please try another file.','error')}finally{$('run').disabled=false}};
+ // JSZip is used only to read the DOCX package in-browser.
+ function importDocxZip(){return new Promise((resolve,reject)=>{if(window.JSZip)return resolve(window.JSZip);let s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';s.onload=()=>resolve(window.JSZip);s.onerror=()=>reject(Error('Could not load DOCX reader.'));document.head.appendChild(s)})}
 
-<section class="sp-donate">
- <div class="container donate-panel">
-  <div class="donate-heart">♡</div>
-  <div class="donate-copy"><h2>Support FreePDF Hub</h2><p>If you find this website useful, you can support us with a voluntary donation.</p></div>
-  <div class="donate-number"><small>DONATION CONTACT / UPI NUMBER</small><strong>76740 97096</strong></div>
-  <button class="btn" id="copyDonation">Copy number</button>
-  <span id="donateStatus" class="donate-status" aria-live="polite"></span>
- </div>
-</section>
+ // FreePDF Hub support buttons
+ const likeBtn=document.getElementById('likeBtn');
+ const likeCount=document.getElementById('likeCount');
+ const likeMessage=document.getElementById('likeMessage');
+ if(likeBtn && likeCount){
+   let liked=localStorage.getItem('freepdfhub-liked')==='yes';
+   let count=Number(localStorage.getItem('freepdfhub-like-count')||0);
+   likeCount.textContent=count;
+   const paintLike=()=>{likeBtn.innerHTML=(liked?'♥ Liked ':'♡ Like ')+'<span id="likeCount">'+count+'</span>';};
+   paintLike();
+   likeBtn.addEventListener('click',()=>{
+     if(liked){liked=false;count=Math.max(0,count-1);localStorage.removeItem('freepdfhub-liked');}
+     else{liked=true;count+=1;localStorage.setItem('freepdfhub-liked','yes');}
+     localStorage.setItem('freepdfhub-like-count',String(count));
+     paintLike();
+     if(likeMessage)likeMessage.textContent=liked?'Thanks for supporting FreePDF Hub!':'Your like was removed.';
+   });
+ }
+ const copyUpi=document.getElementById('copyUpi');
+ if(copyUpi)copyUpi.addEventListener('click',async()=>{
+   const value='76740 97096';
+   try{await navigator.clipboard.writeText(value);copyUpi.textContent='Copied!';}
+   catch(e){copyUpi.textContent='Copy unavailable — select the UPI detail above';}
+   setTimeout(()=>copyUpi.textContent='Copy UPI detail',2200);
+ });
+ const shareHubBtn=document.getElementById('shareHubBtn');
+ if(shareHubBtn)shareHubBtn.addEventListener('click',async()=>{
+   const data={title:'FreePDF Hub',text:'Try these free PDF tools at FreePDF Hub.',url:'https://freepdf.sbs/'};
+   try{if(navigator.share)await navigator.share(data);else{await navigator.clipboard.writeText(data.url);shareHubBtn.textContent='Link copied!';setTimeout(()=>shareHubBtn.textContent='↗ Share FreePDF Hub',2200);}}
+   catch(e){}
+ });
 
-<section class="sp-trust">
- <div class="container sp-trust-grid">
-  <div><b>✓</b><span><strong>Easy to use</strong><small>Simple tools and clear steps</small></span></div>
-  <div><b>♡</b><span><strong>Free access</strong><small>No sign-up required</small></span></div>
-  <div><b>▣</b><span><strong>Any device</strong><small>Phone, tablet or computer</small></span></div>
- </div>
-</section>
-</main>
-<footer><div class="container simple-footer"><a class="logo" href="/"><span class="logo-mark">F</span>FreePDF <span>Hub</span></a><div><a href="/about.html">About</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/contact.html">Contact</a></div><p>© 2026 FreePDF Hub</p></div></footer>
-<div class="floating-actions" aria-label="Quick actions">
- <button class="float-btn top" id="sideTop" aria-label="Back to top">↑</button>
- <button class="float-btn share" id="sideShare" title="Share website">↗<small>Share</small></button>
- <button class="float-btn like" id="sideLike" title="Like website" aria-pressed="false">♥<small>Like</small></button>
- <button class="float-btn donate" id="sideDonate" title="Donate">♡<small>Donate</small></button>
- <a class="float-btn contact" href="/contact.html" title="Contact us">✉<small>Contact</small></a>
-</div>
-<script src="/assets/site.js"></script>
+})();
+</script>
 </body></html>
