@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6d4aff">
+<title>ColorJoy Studio — Creative Coloring Membership</title>
+<style>
+:root{--purple:#6845e8;--ink:#292044;--muted:#706783;--paper:#fff;--bg:#f5f0ff;--line:#e8defb;--pink:#ff75b5;--cyan:#63d9e8;--gold:#ffd76a}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f5efff 0%,#fff4f8 45%,#edfbff 100%);background-attachment:fixed;color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(115deg,#5835d5 0%,#9254ed 48%,#f06caf 100%);color:#fff;padding:20px max(20px,calc((100% - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;box-shadow:0 10px 30px #6942c833;position:relative;overflow:hidden}
+header:after{content:"✦  ✿  ✧  ●";position:absolute;right:7%;bottom:-22px;font-size:66px;letter-spacing:18px;color:#ffffff20;transform:rotate(-9deg);pointer-events:none}
+.logo{font-size:23px;font-weight:900;letter-spacing:-.7px}.logo span{color:#ffe77a}.tag{font-size:13px;opacity:.92}
+main{max-width:1200px;margin:26px auto;padding:0 18px}.hero{text-align:center;margin:25px 0 28px}.hero h1{font-size:clamp(29px,5vw,46px);margin:0 0 9px;letter-spacing:-1.5px}.hero p{color:var(--muted);margin:0}
+.tabs{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:20px 0}.tab,.btn{border:0;border-radius:13px;padding:11px 17px;font-weight:750;cursor:pointer;font-size:14px;transition:.18s}.tab{background:#fff;color:var(--ink);border:1px solid var(--line)}.tab.active,.btn.primary{background:var(--purple);color:#fff}.btn{background:#f0edff;color:#5140b2}.btn:hover,.tab:hover{transform:translateY(-1px);filter:brightness(.98)}button:focus-visible,input:focus-visible{outline:3px solid #ffcf54;outline-offset:2px}
+.panel{background:#ffffffed;border:1px solid #fff;border-radius:22px;padding:18px;box-shadow:0 12px 36px #4933a212;backdrop-filter:blur(8px)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:15px}.art-card{border:1px solid var(--line);border-radius:17px;padding:10px;background:#fff;cursor:pointer;text-align:center;transition:.2s}.art-card:hover{border-color:#a99aff;transform:translateY(-3px);box-shadow:0 8px 20px #4933a21a}.art-card svg{width:100%;height:135px;background:#fff;border-radius:11px}.art-card strong{display:block;margin:7px 0 2px}.art-card small{color:var(--muted)}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px;align-items:start}.canvas-panel{min-width:0}.canvas-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}.canvas-wrap{background:#f3f1fa;border-radius:16px;padding:12px;display:flex;justify-content:center;align-items:center;min-height:350px;overflow:auto}.canvas-wrap canvas{display:block;background:#fff;max-width:100%;height:auto;max-height:72vh;touch-action:none;box-shadow:0 3px 14px #251a4518;border-radius:5px}
+.tools h3{margin:2px 0 14px}.toolgroup{padding:13px 0;border-top:1px solid var(--line)}.toolgroup:first-of-type{border-top:0}.toolgroup label{font-size:13px;font-weight:750;display:block;margin-bottom:9px}.toolrow{display:flex;gap:7px;flex-wrap:wrap}.toolbtn{background:#f4f1ff;border:1px solid #e7e1ff;border-radius:10px;padding:9px 10px;cursor:pointer;font-weight:700;color:#5140a6}.toolbtn.active{background:#6d4aff;color:white;border-color:#6d4aff}.colors{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.swatch{width:100%;aspect-ratio:1;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #ddd;cursor:pointer}.swatch.active{box-shadow:0 0 0 3px var(--purple)}input[type=color]{width:100%;height:39px;border:0;background:none;cursor:pointer}input[type=range]{width:100%;accent-color:var(--purple)}
+.hint{font-size:12px;color:var(--muted);line-height:1.5}.hidden{display:none!important}.upload-label{display:inline-flex;align-items:center;justify-content:center;gap:7px}.footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+
+.site-nav{position:sticky;top:0;z-index:20;background:#ffffffed;backdrop-filter:blur(14px);border-bottom:1px solid #e8defb;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:11px 12px;box-shadow:0 7px 22px #4933a20d}
+.nav-link{border:0;background:transparent;color:#514b68;padding:10px 13px;border-radius:10px;font-weight:750;cursor:pointer}
+.nav-link.active,.nav-link:hover{background:linear-gradient(120deg,#eee8ff,#ffe8f3);color:var(--purple)}
+.page-section{display:none;animation:pageIn .2s ease}.page-section.active{display:block}
+@keyframes pageIn{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{padding:42px 18px 40px;background:radial-gradient(circle at 8% 18%,#ffd9ec 0,transparent 30%),radial-gradient(circle at 90% 12%,#d9d1ff 0,transparent 31%),radial-gradient(circle at 72% 100%,#c9f5f4 0,transparent 28%),linear-gradient(130deg,#fff 0%,#fff8fd 52%,#f4f1ff 100%);border:1px solid #ffffff;border-radius:28px;box-shadow:0 18px 50px #6845e817;position:relative;overflow:hidden}
+.hero h1{background:linear-gradient(100deg,#5733cf,#d84d9a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:16px;line-height:1.65}
+.hero .hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:20px 0}
+.feature-card{background:linear-gradient(145deg,#fff 0%,#fffaff 100%);border:1px solid #fff;border-radius:20px;padding:20px;box-shadow:0 10px 28px #4933a20c;transition:transform .2s,box-shadow .2s}.feature-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px #4933a21a}
+.feature-card .emoji{font-size:28px}.feature-card h3{margin:9px 0 6px}.feature-card p{color:var(--muted);font-size:14px;line-height:1.55;margin:0}
+.page-heading{text-align:center;margin:30px 0 24px}.page-heading h1{margin:0 0 8px;font-size:clamp(27px,4vw,38px);background:linear-gradient(100deg,#5733cf,#d84d9a);-webkit-background-clip:text;background-clip:text;color:transparent}.page-heading p{color:var(--muted)}
+.price-card{max-width:510px;margin:24px auto;background:linear-gradient(155deg,#fff 0%,#fff7fc 52%,#f2efff 100%);border:2px solid #c9b9ff;border-radius:26px;padding:28px;box-shadow:0 20px 48px #6942c82b;text-align:center;position:relative;overflow:hidden}.price-card:before{content:'✦';position:absolute;right:20px;top:12px;font-size:38px;color:#e9a6d0}
+.price{font-size:48px;font-weight:900;letter-spacing:-2px;color:var(--purple);margin:8px 0}.price small{font-size:15px;letter-spacing:0;color:var(--muted);font-weight:600}
+
+
+.game-card{min-width:0}.game-box{background:linear-gradient(145deg,#faf7ff,#fff);border:1px solid #e8defb;border-radius:16px;padding:15px;margin-top:14px;text-align:center}
+.match-target{height:76px;width:100%;border-radius:14px;border:4px solid white;box-shadow:0 0 0 1px #ddd;margin:8px auto}
+.game-colors{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
+.game-choice{height:48px;border:3px solid white;border-radius:12px;box-shadow:0 0 0 1px #ddd;cursor:pointer}
+.game-choice:focus-visible,.memory-tile:focus-visible{outline:3px solid #292044;outline-offset:3px}
+.game-score{font-size:14px;color:var(--muted)}
+.memory-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:230px;margin:10px auto}
+.memory-tile{height:75px;border:0;border-radius:15px;opacity:.78;cursor:pointer;transition:filter .15s,transform .15s}
+.memory-tile:nth-child(1){background:#ff75b5}.memory-tile:nth-child(2){background:#579bff}.memory-tile:nth-child(3){background:#ffd34e}.memory-tile:nth-child(4){background:#5acb86}
+.memory-tile.lit{opacity:1;filter:brightness(1.28);transform:scale(.96);box-shadow:0 0 0 4px #fff,0 0 0 7px #8062e8}
+.mix-result{height:65px;border-radius:13px;margin:12px 0;border:4px solid white;box-shadow:0 0 0 1px #ddd;background:#800080}
+.game-box label{display:block;text-align:left;font-size:13px;font-weight:750;margin:8px 0 3px}
+.game-box input[type=color]{height:42px}
+
+.payment-options{max-width:560px;margin:22px auto;text-align:left}
+.payment-options h3{text-align:center}
+.payment-method{border:1px solid var(--line);border-radius:16px;padding:18px;margin:12px 0;background:#fbfaff}
+.payment-method p{color:var(--muted);line-height:1.55;font-size:14px}
+.upi-number{font-size:28px;font-weight:900;letter-spacing:1px;text-align:center;color:var(--purple);padding:12px}
+
+.price-card ul{list-style:none;padding:0;margin:20px auto;text-align:left;max-width:320px;line-height:2}
+.price-card li:before{content:'✓';color:#239b68;font-weight:900;margin-right:10px}
+.wide-btn{width:100%;padding:14px 18px;border:0;border-radius:14px;background:linear-gradient(110deg,#623ce0,#a44ee8 55%,#e65ca7);color:white;font-weight:850;font-size:15px;cursor:pointer;box-shadow:0 8px 20px #8c4ad344;transition:transform .2s,filter .2s}.wide-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.note{font-size:12px;color:var(--muted);line-height:1.6}
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:10px 0}
+.faq-item h3{font-size:16px;margin:0 0 7px}.faq-item p{margin:0;color:var(--muted);line-height:1.55}
+.contact-panel{max-width:650px;margin:auto}
+.modal-backdrop{position:fixed;inset:0;background:#17132dcc;z-index:100;display:none;align-items:center;justify-content:center;padding:18px}
+.modal-backdrop.open{display:flex}
+.modal-card{background:white;border-radius:22px;padding:24px;max-width:440px;width:100%;box-shadow:0 20px 70px #0004}
+.modal-card h2{margin-top:0}.modal-card p{color:var(--muted);line-height:1.6}
+.modal-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.modal-actions button{flex:1;min-width:120px}
+@media(max-width:520px){.site-nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}.nav-link{white-space:nowrap}.hero{padding:22px 10px}}
+
+@media(max-width:800px){.workspace{grid-template-columns:1fr}.tools{order:2}.canvas-wrap{min-height:270px}.tools .toolgroup{display:block}.hero{margin-top:18px}}
+@media(max-width:480px){main{padding:0 12px}.panel{padding:12px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.canvas-wrap{padding:6px}.btn,.tab{padding:10px 12px}}
+</style>
+</head>
+<body>
+<header>
+<div><div class="logo">🎨 Color<span>Joy</span> Studio</div><div class="tag">A happy place to color, create and relax</div></div>
+<div class="tag">CREATE • COLOR • INSPIRE</div>
+</header>
+<nav class="site-nav" aria-label="Main navigation">
+<button class="nav-link active" data-page="home">Home</button>
+<button class="nav-link" data-page="explore">Explore</button>
+<button class="nav-link" data-page="studioPage">Coloring Studio</button>
+<button class="nav-link" data-page="games">🎮 Games</button>
+<button class="nav-link" data-page="premium">Premium</button>
+<button class="nav-link" data-page="about">About</button>
+<button class="nav-link" data-page="faq">FAQ</button>
+<button class="nav-link" data-page="contact">Contact</button>
+</nav>
+<main>
+<section id="home" class="page-section active">
+  <section class="hero"><h1>Let your imagination shine!</h1><p>Discover beautiful coloring pages, relax with creativity and turn every idea into art.</p>
+  <div class="hero-actions"><button class="btn primary" data-goto="explore">Explore coloring pages</button><button class="btn" data-goto="premium">Join Premium · ₹100/month</button></div></section>
+  <div class="feature-grid">
+    <article class="feature-card"><div class="emoji">🖼️</div><h3>Creative collections</h3><p>Explore nature, animals, space and more coloring themes.</p></article>
+    <article class="feature-card"><div class="emoji">🖌️</div><h3>Easy coloring studio</h3><p>Use brushes, fill colors, undo, redo and upload your own picture.</p></article>
+    <article class="feature-card"><div class="emoji">⬇️</div><h3>Save your artwork</h3><p>Download your finished creation as a PNG image.</p></article>
+  </div>
+  <div class="panel" style="text-align:center"><h2>Make every day more colorful</h2><p class="hint">A friendly creative space for kids, families, learners and artists.</p><button class="btn primary" data-goto="explore">Start exploring</button></div>
+</section>
+
+<section id="explore" class="page-section">
+<div class="page-heading"><h1>Explore coloring pages</h1><p>Choose a design and preview the creative possibilities.</p></div>
+<div class="tabs"><button class="tab active" id="browseTab">🖼️ Coloring pages</button><button class="tab" id="studioTab">🖌️ My coloring studio</button></div>
+<section id="browse">
+<div class="panel">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:15px"><div><strong>Pick your favorite page</strong><div class="hint">Tap any picture to open it in the studio.</div></div><label class="btn upload-label">＋ Upload your image<input id="upload" type="file" accept="image/*" hidden></label></div>
+<div class="gallery" id="gallery"></div>
+</div>
+</section>
+</section>
+<section id="studioPage" class="page-section">
+<section id="studio" class="hidden">
+<div class="workspace">
+<div class="panel canvas-panel">
+<div class="canvas-top"><div><strong id="artTitle">Your coloring page</strong><div class="hint">Color inside the lines, or make your own design.</div></div><div class="toolrow"><button class="btn" id="undo">↶ Undo</button><button class="btn" id="redo">↷ Redo</button></div></div>
+<div class="canvas-wrap"><canvas id="artCanvas" width="800" height="600" aria-label="Coloring canvas"></canvas></div>
+<div class="toolrow" style="margin-top:13px;justify-content:center"><button class="btn" id="clear">Clear colors</button><button class="btn primary" id="download">⬇ Download PNG</button></div>
+</div>
+<aside class="panel tools">
+<h3>🧰 Coloring tools</h3>
+<div class="toolgroup"><label>Choose a tool</label><div class="toolrow"><button class="toolbtn active" data-tool="brush">🖌 Brush</button><button class="toolbtn" data-tool="fill">🪣 Fill</button><button class="toolbtn" data-tool="eraser">⌫ Eraser</button></div><p class="hint">Fill: tap an enclosed area. Brush: draw freely. Eraser: remove your strokes.</p></div>
+<div class="toolgroup"><label>Color palette</label><div class="colors" id="colors"></div><label style="margin-top:12px">🌈 Unlimited colors — choose any color</label><input type="color" id="customColor" value="#ff5b78" aria-label="Choose any custom color"><p class="hint">Tap the color box to open your phone or computer color picker and select any shade you like.</p></div>
+<div class="toolgroup"><label>Brush size: <span id="sizeValue">12</span> px</label><input type="range" id="brushSize" min="2" max="48" value="12"></div>
+<div class="toolgroup"><label>Quick actions</label><div class="toolrow"><button class="toolbtn" id="fit">Fit page</button><button class="toolbtn" id="newPage">Choose page</button></div></div>
+<div class="toolgroup"><p class="hint">Tip: On a phone or tablet, use your finger to color. Your work stays in this browser while the page is open. Download your artwork to keep it.</p></div>
+</aside>
+</div>
+</section>
+</section>
+
+<section id="premium" class="page-section">
+  <div class="page-heading"><h1>Unlock your creativity with Premium</h1><p>One simple membership for a more colorful experience.</p></div>
+  <div class="price-card">
+    <div class="hint">COLORJOY PREMIUM MEMBERSHIP</div>
+    <div class="price">₹100 <small>/ month</small></div>
+    <p>Enjoy the full ColorJoy Studio experience with a monthly subscription.</p>
+    <ul><li>Access to premium coloring collections</li><li>Advanced creative tools as they are added</li><li>Download your finished artwork</li><li>New designs and collections</li><li>Use on mobile, tablet and desktop</li></ul>
+    <div class="payment-options">
+      <h3>Choose your payment method</h3>
+      <div class="payment-method">
+        <strong>📱 UPI payment</strong>
+        <p>Pay ₹100 using your UPI app to this registered mobile number:</p>
+        <div class="upi-number">76740 97096</div>
+        <button class="wide-btn" id="copyUpiNumber" type="button">Copy UPI mobile number</button>
+        <p class="note">In your UPI app, choose mobile-number payment and confirm the recipient name before paying. This number must be registered for UPI. A mobile number alone is not a verified UPI ID.</p>
+      </div>
+      <div class="payment-method">
+        <strong>🏦 Bank transfer</strong>
+        <p>Bank transfer details are not yet provided. Please contact the website owner to receive the account name, account number and IFSC before making a transfer.</p>
+      </div>
+      <p class="note">Membership access is activated only after the payment is received and manually verified. Keep your UPI/bank transaction reference for confirmation.</p>
+    </div>
+  </div>
+  <div class="feature-grid"><article class="feature-card"><div class="emoji">🔒</div><h3>Member access</h3><p>Premium content is intended for active subscribers.</p></article><article class="feature-card"><div class="emoji">💜</div><h3>Simple pricing</h3><p>₹100 per month. Clear pricing with no hidden charges.</p></article><article class="feature-card"><div class="emoji">📱</div><h3>Any device</h3><p>Enjoy your creative space on supported web browsers.</p></article></div>
+</section>
+
+
+<section id="games" class="page-section">
+  <div class="page-heading"><h1>🎮 Color Games Zone</h1><p>Play, learn colors and challenge yourself. All games are free to try!</p></div>
+  <div class="feature-grid">
+    <article class="feature-card game-card">
+      <div class="emoji">🎯</div><h3>Color Match</h3>
+      <p>Find the color that matches the target swatch and earn points.</p>
+      <div class="game-box">
+        <div id="matchTarget" class="match-target" aria-label="Target color"></div>
+        <p id="matchPrompt">Tap the matching color!</p>
+        <div id="matchChoices" class="game-colors"></div>
+        <p class="game-score">Score: <strong id="matchScore">0</strong></p>
+        <button class="btn primary" id="newMatch">New round</button>
+        <p class="hint" id="matchFeedback" aria-live="polite">Ready? Find the matching color.</p>
+      </div>
+    </article>
+    <article class="feature-card game-card">
+      <div class="emoji">🧠</div><h3>Color Memory</h3>
+      <p>Watch the color sequence, then repeat it in the same order.</p>
+      <div class="game-box">
+        <div class="memory-grid">
+          <button class="memory-tile" data-memory="0" aria-label="Pink"></button>
+          <button class="memory-tile" data-memory="1" aria-label="Blue"></button>
+          <button class="memory-tile" data-memory="2" aria-label="Yellow"></button>
+          <button class="memory-tile" data-memory="3" aria-label="Green"></button>
+        </div>
+        <p class="game-score">Level: <strong id="memoryLevel">0</strong></p>
+        <button class="btn primary" id="startMemory">Start game</button>
+        <p class="hint" id="memoryFeedback" aria-live="polite">Press Start and remember the sequence.</p>
+      </div>
+    </article>
+    <article class="feature-card game-card">
+      <div class="emoji">🧪</div><h3>Color Mixer</h3>
+      <p>Learn what happens when you combine two colors.</p>
+      <div class="game-box">
+        <label for="mixOne">First color</label><input type="color" id="mixOne" value="#ff0000">
+        <label for="mixTwo">Second color</label><input type="color" id="mixTwo" value="#0000ff">
+        <div class="mix-result" id="mixResult" aria-label="Mixed color preview"></div>
+        <p id="mixHex" class="game-score">Mixed color: #800080</p>
+        <button class="btn primary" id="mixButton">Mix colors</button>
+        <p class="hint">A fun digital color blend preview.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="about" class="page-section">
+  <div class="page-heading"><h1>About ColorJoy Studio</h1><p>A joyful place where imagination meets color.</p></div>
+  <div class="panel"><h2>Creativity for everyone</h2><p>ColorJoy Studio is an online coloring experience designed to make creativity simple and enjoyable. Browse coloring designs, experiment with colors, draw with your finger or mouse, and save your finished artwork.</p><p class="hint">Our goal is to keep the experience welcoming, easy to use and accessible across devices.</p></div>
+</section>
+
+<section id="faq" class="page-section">
+  <div class="page-heading"><h1>Frequently asked questions</h1><p>Helpful answers about ColorJoy Studio membership.</p></div>
+  <div class="faq-item"><h3>How much does Premium cost?</h3><p>Premium is planned at ₹100 per month.</p></div>
+  <div class="faq-item"><h3>When will my subscription start?</h3><p>Your membership should start only after the payment provider confirms successful payment and the secure membership system activates your account.</p></div>
+  <div class="faq-item"><h3>Can I use ColorJoy on my phone?</h3><p>Yes. The website layout supports mobile, tablet and desktop browsers.</p></div>
+  <div class="faq-item"><h3>Can I download my artwork?</h3><p>The coloring studio includes a PNG download option.</p></div>
+  <div class="faq-item"><h3>Is payment active on this page?</h3><p>UPI mobile-number payment and bank transfer are the available methods shown on the membership page. Payments must be checked by the owner before membership access is activated.</p></div>
+</section>
+
+<section id="contact" class="page-section">
+  <div class="page-heading"><h1>Contact ColorJoy Studio</h1><p>Questions, feedback or partnership enquiries.</p></div>
+  <div class="panel contact-panel"><h2>We'd love to hear from you</h2><p>For support, subscription questions or suggestions, please contact the website owner using the contact details that will be added here.</p><p class="hint">Website owner: add your official support email address and business contact number before publishing this page.</p></div>
+</section>
+</main>
+<div class="footer">ColorJoy Studio · Create • Color • Inspire · Membership plan: ₹100/month 💜</div>
+
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+const line=(d,sw=7)=>`<path d="${d}" fill="white" stroke="#222" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const circle=(cx,cy,r)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="white" stroke="#222" stroke-width="7"/>`;
+const ellipse=(cx,cy,rx,ry)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="white" stroke="#222" stroke-width="7"/>`;
+const templates=[
+{name:'Happy Sun',cat:'Nature',svg:`${circle(400,300,110)}${line('M400 85V130 M400 470V515 M185 300H230 M570 300H615 M248 148L280 180 M520 420L552 452 M248 452L280 420 M520 180L552 148',12)}${ellipse(365,285,12,18)}${ellipse(435,285,12,18)}${line('M350 335 Q400 390 450 335',8)}`},
+{name:'Cute Cat',cat:'Animals',svg:`${line('M285 235 L270 100 L375 175 Q400 160 425 175 L530 100 L515 235 Q555 300 530 390 Q500 490 400 490 Q300 490 270 390 Q245 300 285 235Z')}${ellipse(350,310,18,25)}${ellipse(450,310,18,25)}${line('M390 365 Q400 375 410 365 M400 375 Q380 405 360 390 M400 375 Q420 405 440 390',6)}${line('M300 360L220 345 M300 385L220 395 M500 360L580 345 M500 385L580 395',5)}`},
+{name:'Butterfly',cat:'Nature',svg:`${ellipse(400,310,23,130)}${line('M390 190 Q300 70 205 150 Q100 245 330 330 Q130 430 245 505 Q340 545 390 385Z')}${line('M410 190 Q500 70 595 150 Q700 245 470 330 Q670 430 555 505 Q460 545 410 385Z')}${circle(270,225,35)}${circle(530,225,35)}${circle(275,430,27)}${circle(525,430,27)}${line('M390 185 Q350 100 315 105 M410 185 Q450 100 485 105',6)}`},
+{name:'Flower Garden',cat:'Nature',svg:`${line('M400 570V330 M400 460 Q320 390 280 450 Q330 510 400 485 M400 420 Q480 350 525 420 Q475 470 400 450',7)}${circle(400,265,45)}${[0,60,120,180,240,300].map(a=>{let x=400+Math.cos(a*Math.PI/180)*78,y=265+Math.sin(a*Math.PI/180)*78;return circle(x,y,43)}).join('')}${circle(400,265,35)}`},
+{name:'Rocket Adventure',cat:'Space',svg:`${line('M400 95 Q545 205 485 430 L400 500 L315 430 Q255 205 400 95Z')}${circle(400,270,48)}${line('M315 370L235 455L315 440 M485 370L565 455L485 440 M360 465L345 540L400 510L455 540L440 465',7)}${line('M370 545 Q400 590 430 545',8)}`},
+{name:'Dinosaur',cat:'Animals',svg:`${line('M170 430 Q155 330 235 270 Q280 220 375 245 Q450 175 530 235 Q610 285 570 370 L625 420 L555 435 L520 390 Q490 470 420 480 L420 550 L365 550 L355 470 L290 470 L275 550 L220 550 L235 430Z')}${circle(500,275,13)}${line('M540 340 Q565 350 580 335',5)}${line('M270 275L245 220 M330 245L320 190 M390 240L400 185',7)}`}
+];
+const canvas=document.getElementById('artCanvas'),ctx=canvas.getContext('2d',{willReadFrequently:true});
+let base=null, tool='brush', color='#ff5b78',size=12,drawing=false,last=null,history=[],redoStack=[],title='Happy Sun';
+const palette=['#ff5b78','#ff9f43','#ffd93d','#6bcb77','#4d96ff','#9b5de5','#f15bb5','#00c2a8','#8d6e63','#333333','#ffffff','#b8c0ff','#ffcad4','#caffbf','#fdffb6','#a0c4ff','#d0bfff','#ffc6ff'];
+const gallery=document.getElementById('gallery');
+templates.forEach((t,i)=>{let card=document.createElement('button');card.className='art-card';card.innerHTML=`<svg viewBox="0 0 800 600" xmlns="${NS}">${t.svg}</svg><strong>${t.name}</strong><small>${t.cat}</small>`;card.addEventListener('click',()=>loadTemplate(i));gallery.appendChild(card)});
+const colors=document.getElementById('colors');palette.forEach(c=>{let b=document.createElement('button');b.className='swatch'+(c===color?' active':'');b.style.background=c;b.title=c;b.addEventListener('click',()=>setColor(c));colors.appendChild(b)});
+function setColor(c){color=c;document.getElementById('customColor').value=c;document.querySelectorAll('.swatch').forEach(b=>b.classList.toggle('active',b.title===c))}
+function snapshot(){history.push(ctx.getImageData(0,0,canvas.width,canvas.height));if(history.length>25)history.shift();redoStack=[]}
+function switchTab(which){document.getElementById('browse').classList.toggle('hidden',which!=='browse');document.getElementById('studio').classList.toggle('hidden',which!=='studio');document.getElementById('browseTab').classList.toggle('active',which==='browse');document.getElementById('studioTab').classList.toggle('active',which==='studio')}
+function renderSvg(svg){let blob=new Blob([`<svg xmlns="${NS}" viewBox="0 0 800 600" width="800" height="600">${svg}</svg>`],{type:'image/svg+xml'}),url=URL.createObjectURL(blob),img=new Image();img.onload=()=>{ctx.clearRect(0,0,800,600);ctx.fillStyle='#fff';ctx.fillRect(0,0,800,600);ctx.drawImage(img,0,0,800,600);base=ctx.getImageData(0,0,800,600);history=[];redoStack=[];URL.revokeObjectURL(url)};img.src=url}
+function loadTemplate(i){let t=templates[i];title=t.name;document.getElementById('artTitle').textContent=title;renderSvg(t.svg);switchTab('studio')}
+loadTemplate(0);switchTab('browse');
+document.getElementById('browseTab').onclick=()=>switchTab('browse');document.getElementById('studioTab').onclick=()=>switchTab('studio');
+document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{tool=b.dataset.tool;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('active',x===b))});
+document.getElementById('customColor').oninput=e=>setColor(e.target.value);
+document.getElementById('brushSize').oninput=e=>{size=+e.target.value;document.getElementById('sizeValue').textContent=size};
+function pos(e){let r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}}
+canvas.addEventListener('pointerdown',e=>{e.preventDefault();canvas.setPointerCapture(e.pointerId);let p=pos(e);if(tool==='fill'){snapshot();floodFill(Math.floor(p.x),Math.floor(p.y));return}snapshot();drawing=true;last=p;ctx.beginPath();ctx.arc(p.x,p.y,size/2,0,Math.PI*2);ctx.fillStyle=tool==='eraser'?'#ffffff':color;ctx.fill()});
+canvas.addEventListener('pointermove',e=>{if(!drawing)return;let p=pos(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.lineWidth=size;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle=tool==='eraser'?'#ffffff':color;ctx.stroke();last=p});
+function stop(){drawing=false;last=null}canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);
+function floodFill(x,y){let w=canvas.width,h=canvas.height,img=ctx.getImageData(0,0,w,h),d=img.data,idx=(y*w+x)*4,target=[d[idx],d[idx+1],d[idx+2],d[idx+3]],hex=color.replace('#',''),fill=[parseInt(hex.slice(0,2),16),parseInt(hex.slice(2,4),16),parseInt(hex.slice(4,6),16),255];if(target.every((v,i)=>Math.abs(v-fill[i])<8))return;let stack=[[x,y]],seen=new Uint8Array(w*h),matches=(i)=>Math.abs(d[i]-target[0])<22&&Math.abs(d[i+1]-target[1])<22&&Math.abs(d[i+2]-target[2])<22&&Math.abs(d[i+3]-target[3])<22;while(stack.length){let [px,py]=stack.pop();if(px<0||py<0||px>=w||py>=h)continue;let p=py*w+px;if(seen[p])continue;seen[p]=1;let i=p*4;if(!matches(i))continue;d[i]=fill[0];d[i+1]=fill[1];d[i+2]=fill[2];d[i+3]=255;stack.push([px+1,py],[px-1,py],[px,py+1],[px,py-1])}ctx.putImageData(img,0,0)}
+document.getElementById('undo').onclick=()=>{if(history.length){redoStack.push(ctx.getImageData(0,0,800,600));ctx.putImageData(history.pop(),0,0)}};
+document.getElementById('redo').onclick=()=>{if(redoStack.length){history.push(ctx.getImageData(0,0,800,600));ctx.putImageData(redoStack.pop(),0,0)}};
+document.getElementById('clear').onclick=()=>{if(!base)return;snapshot();ctx.putImageData(base,0,0)};
+document.getElementById('download').onclick=()=>{let a=document.createElement('a');a.download='my-colorjoy-art.png';a.href=canvas.toDataURL('image/png');a.click()};
+document.getElementById('newPage').onclick=()=>switchTab('browse');
+document.getElementById('fit').onclick=()=>{canvas.style.maxHeight='72vh';canvas.style.width='100%'};
+document.getElementById('upload').onchange=e=>{let f=e.target.files[0];if(!f)return;let img=new Image(),url=URL.createObjectURL(f);img.onload=()=>{snapshot();ctx.fillStyle='#fff';ctx.fillRect(0,0,800,600);let scale=Math.min(760/img.width,560/img.height),w=img.width*scale,h=img.height*scale;ctx.drawImage(img,(800-w)/2,(600-h)/2,w,h);base=ctx.getImageData(0,0,800,600);history=[];redoStack=[];title=f.name.replace(/\.[^.]+$/,'');document.getElementById('artTitle').textContent=title;URL.revokeObjectURL(url);switchTab('studio')};img.src=url;e.target.value=''};
+
+
+// Color Match game
+const gamePalette=['#ff5b78','#ff9f43','#ffd93d','#6bcb77','#4d96ff','#9b5de5','#f15bb5','#00c2a8','#8d6e63'];
+let matchAnswer='',matchPoints=0;
+function makeMatchRound(){
+  const answer=gamePalette[Math.floor(Math.random()*gamePalette.length)];
+  matchAnswer=answer;
+  document.getElementById('matchTarget').style.background=answer;
+  const choices=[answer];
+  while(choices.length<6){const c=gamePalette[Math.floor(Math.random()*gamePalette.length)];if(!choices.includes(c))choices.push(c);}
+  choices.sort(()=>Math.random()-.5);
+  const wrap=document.getElementById('matchChoices');wrap.innerHTML='';
+  choices.forEach(c=>{const b=document.createElement('button');b.className='game-choice';b.style.background=c;b.setAttribute('aria-label','Choose color '+c);b.addEventListener('click',()=>{
+    if(c===matchAnswer){matchPoints++;document.getElementById('matchFeedback').textContent='Correct! Great eye! 🌟';document.getElementById('matchScore').textContent=matchPoints;makeMatchRound();}
+    else{document.getElementById('matchFeedback').textContent='Not quite. Try the target color again!';}
+  });wrap.appendChild(b);});
+}
+document.getElementById('newMatch').addEventListener('click',()=>{document.getElementById('matchFeedback').textContent='New round! Find the matching color.';makeMatchRound();});
+makeMatchRound();
+
+// Color Memory sequence game
+const memoryTiles=[...document.querySelectorAll('.memory-tile')];
+let memorySequence=[],memoryInput=[],memoryActive=false,memoryLevel=0;
+function flashMemory(index){const tile=memoryTiles[index];tile.classList.add('lit');setTimeout(()=>tile.classList.remove('lit'),420);}
+function playMemorySequence(){
+  memoryActive=false;document.getElementById('memoryFeedback').textContent='Watch carefully...';
+  memorySequence.forEach((v,i)=>setTimeout(()=>flashMemory(v),650+i*720));
+  setTimeout(()=>{memoryInput=[];memoryActive=true;document.getElementById('memoryFeedback').textContent='Your turn! Repeat the sequence.';},650+memorySequence.length*720);
+}
+document.getElementById('startMemory').addEventListener('click',()=>{
+  memorySequence=[];memoryInput=[];memoryLevel=0;memorySequence.push(Math.floor(Math.random()*4));document.getElementById('memoryLevel').textContent=memoryLevel;playMemorySequence();
+});
+memoryTiles.forEach((tile)=>{
+  tile.addEventListener('click',()=>{
+    if(!memoryActive)return;
+    const v=Number(tile.dataset.memory);flashMemory(v);memoryInput.push(v);
+    const i=memoryInput.length-1;
+    if(memoryInput[i]!==memorySequence[i]){memoryActive=false;document.getElementById('memoryFeedback').textContent='Game over! Press Start to try again.';return;}
+    if(memoryInput.length===memorySequence.length){memoryActive=false;memoryLevel++;document.getElementById('memoryLevel').textContent=memoryLevel;document.getElementById('memoryFeedback').textContent='Awesome! Next level...';memorySequence.push(Math.floor(Math.random()*4));setTimeout(playMemorySequence,850);}
+  });
+});
+
+// Color Mixer: average the two selected RGB values for a simple digital blend.
+function updateMix(){
+  const a=document.getElementById('mixOne').value,b=document.getElementById('mixTwo').value;
+  const rgbA=[1,3,5].map(i=>parseInt(a.slice(i,i+2),16)),rgbB=[1,3,5].map(i=>parseInt(b.slice(i,i+2),16));
+  const mixed='#'+rgbA.map((v,i)=>Math.round((v+rgbB[i])/2).toString(16).padStart(2,'0')).join('');
+  document.getElementById('mixResult').style.background=mixed;document.getElementById('mixHex').textContent='Mixed color: '+mixed.toUpperCase();
+}
+document.getElementById('mixButton').addEventListener('click',updateMix);
+document.getElementById('mixOne').addEventListener('input',updateMix);
+document.getElementById('mixTwo').addEventListener('input',updateMix);
+updateMix();
+
+// Multi-page navigation
+function showPage(pageId){
+  document.querySelectorAll('.page-section').forEach(s=>s.classList.toggle('active',s.id===pageId));
+  document.querySelectorAll('.nav-link').forEach(b=>b.classList.toggle('active',b.dataset.page===pageId));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.goto)));
+const copyUpiButton=document.getElementById('copyUpiNumber');
+if(copyUpiButton){
+  copyUpiButton.addEventListener('click',async()=>{
+    try{
+      await navigator.clipboard.writeText('7674097096');
+      copyUpiButton.textContent='Copied: 76740 97096';
+    }catch(err){
+      window.prompt('Copy this UPI mobile number:', '7674097096');
+    }
+  });
+}
+
+</script>
+</body></html>
